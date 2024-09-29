@@ -7,8 +7,9 @@
             "command": "/bin/bash",
             "args": [
                 "-c",
-                // "if [ ! -f build/${fileBasenameNoExtension} ] || [ ${file} -nt build/${fileBasenameNoExtension} ]; then g++ -std=c++14 -g -lgtest ${file} -o build/${fileBasenameNoExtension}; else echo 无需编译; fi"
-                "if [ ! -f build/${fileBasenameNoExtension} ] || [ ${file} -nt build/${fileBasenameNoExtension} ]; then g++ -std=c++14 -g -lgtest ${file} -o build/${fileBasenameNoExtension}; fi"
+                // "if [ ! -f build/\"${fileBasenameNoExtension}\" ] || [ ${file} -nt build/\"${fileBasenameNoExtension}\" ]; then g++ -std=c++14 -g -lgtest ${file} -o build/\"${fileBasenameNoExtension}\"; else echo 无需编译; fi",
+                // "if [ ! -f build/\"${fileBasenameNoExtension}\" ] || [ ${file} -nt build/\"${fileBasenameNoExtension}\" ]; then g++ -std=c++14 -g -lgtest \"${file}\" -o build/\"${fileBasenameNoExtension}\"; fi",
+                "if [ ! -f build/\"${fileBasenameNoExtension}\" ] || [ ${file} -nt build/\"${fileBasenameNoExtension}\" ]; then clang -std=c++23 -lstdc++ -O2 -gline-tables-only -fsanitize=address -g -lgtest \"${file}\" -o build/\"${fileBasenameNoExtension}\"; fi"
             ],
             "group": {
                 "kind": "build",

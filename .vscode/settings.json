@@ -1,6 +1,11 @@
 {
     "C_Cpp.intelliSenseEngine": "disabled",
     "code-runner.executorMap": {
-        "cpp": "cd $dir && if [ ! -f build/$fileNameWithoutExt ] || [ $fileName -nt build/$fileNameWithoutExt ]; then g++ -std=c++14 -g -lgtest $fileName -o build/$fileNameWithoutExt; fi && ./build/$fileNameWithoutExt"
+        // "cpp": "cd $dir && if [ ! -f build/$fileNameWithoutExt ] || [ $fileName -nt build/$fileNameWithoutExt ]; then g++ -std=c++14 -g -lgtest $fileName -o build/$fileNameWithoutExt; fi && ./build/$fileNameWithoutExt"
+        // LeetCode 说明
+        // 版本：clang 17 采用最新 C++ 23 标准，并使用 GCC 13 提供的 libstdc++。
+        // 编译时，将会采用 -O2 级优化，并提供 -gline-tables-only 参数。AddressSanitizer 也被开启来检测 out-of-bounds 和 use-after-free 错误。
+        // 为了使用方便，大部分标准库的头文件已经被自动导入。
+        "cpp": "cd $dir && if [ ! -f build/$fileNameWithoutExt ] || [ $fileName -nt build/$fileNameWithoutExt ]; then clang -std=c++23 -lstdc++ -O2 -gline-tables-only -fsanitize=address -g -lgtest $fileName -o build/$fileNameWithoutExt; fi && ./build/$fileNameWithoutExt"
     }
 }
